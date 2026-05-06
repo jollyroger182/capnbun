@@ -1,15 +1,45 @@
 # capnbun
 
-To install dependencies:
+A simple library that lets you use [Cap'n Web](https://github.com/cloudflare/capnweb) with [Bun](https://bun.com).
 
-```bash
-bun install
+## Usage
+
+First install `capnbun`:
+
+```shell
+$ bun install capnbun
 ```
 
-To run:
+Then in your code:
 
-```bash
-bun run index.ts
+```typescript
+import { bunWebSocketHandler, newBunWebSocketRpcSession } from 'capnbun'
+import { RpcTarget } from 'capnweb'
+
+export class API extends RpcTarget {
+  greet(name: string) {
+    return `Hello, ${name}!`
+  }
+}
+
+Bun.serve({
+  routes: {
+    '/api': async (req, server) => {
+      return newBunWebSocketRpcSession(req, new API(), server)
+    },
+  },
+  websocket: bunWebSocketHandler(),
+})
 ```
 
-This project was created using `bun init` in bun v1.3.12. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+Client-side:
+
+```typescript
+import { newWebSocketRpcSession } from 'capnweb'
+import type { API } from './api'
+
+using sess = newWebSocketRpcSession<API>('http://localhost:3000/api')
+
+console.log(await sess.greet('capnbun'))
+// Hello, capnbun!
+```
