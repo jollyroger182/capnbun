@@ -1,17 +1,20 @@
 {
-  "name": "capnbun",
-  "version": "0.0.1",
-  "module": "index.ts",
-  "type": "module",
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "capnweb": "^0.7.0",
-    "@types/bun": "latest"
-  },
-  "devDependencies": {
-    "prettier": "^3.8.3",
-    "prettier-plugin-jsdoc": "^1.8.0"
-  }
+	"name": "capnbun",
+	"version": "0.0.1",
+	"module": "index.ts",
+	"type": "module",
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"files": [
+		"index.ts"
+	],
+	"dependencies": {
+		"capnweb": "^0.7.0",
+		"@types/bun": "latest"
+	},
+	"devDependencies": {
+		"prettier": "^3.8.3",
+		"prettier-plugin-jsdoc": "^1.8.0"
+	}
 }
